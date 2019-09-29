@@ -3,9 +3,12 @@ import getHighestUsageDevicePerYear from "./getHighestUsageDevicePerYear";
 import getHighestUsageDeviceByYear from "./getHighestUsageDeviceByYear";
 import getHighestUsageYearByDeviceId from "./getHighestUsageYearByDeviceId";
 
+import signup from "./signup";
+
 export {
   getDevices,
   getHighestUsageDevicePerYear,
   getHighestUsageDeviceByYear,
-  getHighestUsageYearByDeviceId
+  getHighestUsageYearByDeviceId,
+  signup
 };

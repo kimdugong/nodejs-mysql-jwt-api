@@ -3,23 +3,18 @@ import {
   getDevices,
   getHighestUsageDevicePerYear,
   getHighestUsageDeviceByYear,
-  getHighestUsageYearByDeviceId
+  getHighestUsageYearByDeviceId,
+  signup
 } from "../apis";
+
+import { verifySignup } from "../functions";
 
 const router = express.Router();
 
 router.get("/api/v1/devices", getDevices);
-router.get(
-  "/api/v1/getHighestUsageDevicePerYear",
-  getHighestUsageDevicePerYear
-);
-router.get(
-  "/api/v1/getHighestUsageDeviceByYear/:year",
-  getHighestUsageDeviceByYear
-);
-router.get(
-  "/api/v1/getHighestUsageYearByDeviceId/:deviceId",
-  getHighestUsageYearByDeviceId
-);
+router.get("/api/v1/devices/year", getHighestUsageDevicePerYear);
+router.get("/api/v1/devices/:year", getHighestUsageDeviceByYear);
+router.get("/api/v1/devices/year/:deviceId", getHighestUsageYearByDeviceId);
+router.post("/api/v1/auth/signup", [verifySignup, signup]);
 
 export default router;

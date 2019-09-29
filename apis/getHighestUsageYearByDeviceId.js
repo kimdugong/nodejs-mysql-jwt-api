@@ -6,8 +6,8 @@ export default async (req, res) => {
     let devices = await models.sequelize.query(
       `select t1.year, t1.rate, t2.device_name from 
       (select year, rate, device_id from yearusages where 
-        rate = (select max(rate) from yearUsages where device_id = :deviceId)) as t1,
-       devices as t2 where t1.device_id = t2.device_id`,
+        rate = (select max(rate) from yearUsages where device_id = :deviceId)) as t1, 
+        devices as t2 where t1.device_id = t2.device_id`,
       {
         replacements: { deviceId },
         type: models.sequelize.QueryTypes.SELECT
