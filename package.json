@@ -1,0 +1,26 @@
+{
+  "name": "seoul-banking",
+  "version": "1.0.0",
+  "description": "인터넷뱅킹 이용 현황 정보 제공 API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node_modules/.bin/babel-node server.js",
+    "test": "test"
+  },
+  "author": "kimdugong",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql2": "^1.7.0",
+    "redis": "^2.8.0",
+    "sequelize": "^5.19.1",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2",
+    "sequelize-cli": "^5.5.1"
+  }
+}
