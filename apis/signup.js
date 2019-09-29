@@ -13,7 +13,7 @@ export default async (req, res) => {
     }
 
     if (password.length <= 4) {
-      return res.status(402).send({
+      return res.status(400).send({
         error: "parameter invalid",
         message: "password must be longer then 4"
       });

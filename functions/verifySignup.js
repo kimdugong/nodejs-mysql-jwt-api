@@ -10,7 +10,7 @@ export default async (req, res, next) => {
     });
 
     if (user) {
-      return res.status(400).send({ error: "id is already exist." });
+      return res.status(409).send({ error: "id is already exist." });
     }
 
     next();

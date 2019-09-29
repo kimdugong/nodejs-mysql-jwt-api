@@ -1,12 +1,13 @@
 {
   "development": {
-    "url": "mysql://b7b11c9d047aa8:e0463f63@us-cdbr-iron-east-02.cleardb.net/heroku_4cfefa0ef2f540f?reconnect=true",
     "username": "b7b11c9d047aa8",
     "password": "e0463f63",
     "database": "heroku_4cfefa0ef2f540f",
     "host": "us-cdbr-iron-east-02.cleardb.net",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "secret": "very-very-very-secret",
+    "operatorsAliases": false,
+    "expireTime": 300
   },
   "test": {
     "username": "root",

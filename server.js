@@ -26,6 +26,7 @@ models.sequelize
       individualHooks: true
     })
   )
+  .then(() => console.log("table initializing finished!"))
   .catch(error => {
     console.log("table initializing failed", error);
   });

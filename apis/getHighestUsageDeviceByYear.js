@@ -10,7 +10,7 @@ export default async (req, res) => {
       });
     }
     if (!Number(year)) {
-      return res.status(402).send({
+      return res.status(400).send({
         error: "parameter invalid",
         message: "year must be a number"
       });
