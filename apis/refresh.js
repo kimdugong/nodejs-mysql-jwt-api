@@ -4,7 +4,6 @@ const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 
 export default (req, res) => {
-  console.log("! getToken api called");
   const authorization = req.headers["authorization"].split(" ");
   const isBearer = authorization[0] === "Bearer";
   const expiredToken = authorization[1];

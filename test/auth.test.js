@@ -15,7 +15,7 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 describe("User Authentication API Test!", () => {
-  before("DB Flush and DB Initializing", done => {
+  before("DB Flushing and Initializing", done => {
     let sequelize = new Sequelize("", config.username, config.password, {
       dialect: "mysql"
     });
@@ -46,24 +46,7 @@ describe("User Authentication API Test!", () => {
       })
       .catch(error => console.log("create database error  :", error));
   });
-  /*
-   * Test signup api
-   ```
-   expected res [
-        {
-            "user": {
-                "id": "dugong"
-            },
-            "message": "user create successfully."
-        }
-        {
-            "auth": true,
-            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImR1Z29uZyIsImlhdCI6MTU2OTc2MDg0MiwiZXhwIjoxNTY5NzYwOTAyfQ.Wwop54A2rvUP0kDQV1oiylSJfVgvgCm53ypBnTBUf2A",
-            "message": "sign in successfully"
-        }
-    ]
-    ```
-   */
+
   describe("auth api 테스트", () => {
     describe("signup api", () => {
       it("/api/v1/auth/signup", done => {
@@ -76,8 +59,6 @@ describe("User Authentication API Test!", () => {
           .post("/api/v1/auth/signup")
           .send(user)
           .end((err, res) => {
-            //   console.log("/api/v1/auth/signup  res: ", res);
-            //   console.log("/api/v1/auth/signup  err: ", err);
             res.should.have.status(200);
             res.body.should.be.a("object");
             res.body.user.id.should.be.eql(user.id);
@@ -86,6 +67,7 @@ describe("User Authentication API Test!", () => {
           });
       });
     });
+
     describe("signin api", () => {
       let token;
       it("/api/v1/auth/signin", done => {
@@ -98,8 +80,6 @@ describe("User Authentication API Test!", () => {
           .post("/api/v1/auth/signin")
           .send(user)
           .end((err, res) => {
-            //   console.log("/api/v1/auth/signup  res: ", res);
-            //   console.log("/api/v1/auth/signup  err: ", err);
             res.should.have.status(200);
             res.body.should.be.a("object");
             res.body.auth.should.be.true;
@@ -136,8 +116,6 @@ describe("User Authentication API Test!", () => {
           .get("/api/v1/auth/refresh")
           .set("Authorization", `Bearer ${token}`)
           .end((err, res) => {
-            //   console.log("/api/v1/auth/signup  res: ", res);
-            //   console.log("/api/v1/auth/signup  err: ", err);
             jwt.verify(token, config.secret, (err, decoded) => {
               decoded.id.should.be.eql(user.id);
             });
@@ -154,6 +132,12 @@ describe("User Authentication API Test!", () => {
           });
       });
     });
+
+    /**
+     *
+     * token expriation time은 3초 -> 4초후 토큰을 사용한 api통신 시 실패
+     *
+     *  */
 
     describe("Check Token in Expiration Time", () => {
       let token;
@@ -173,7 +157,7 @@ describe("User Authentication API Test!", () => {
           done();
         }, 4000);
       });
-      it("/api/v1/devices", done => {
+      it("Token Exipiration Time Check.", done => {
         chai
           .request(server)
           .get("/api/v1/devices")

@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test";
-const path = require("path");
-const fs = require("fs");
-const chai = require("chai");
+import path from "path";
+import fs from "fs";
+import chai from "chai";
 const expect = chai.expect;
 
 const expectedColumns = [

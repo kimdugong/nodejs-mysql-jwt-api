@@ -2,7 +2,6 @@ import { User } from "../models/";
 
 export default async (req, res, next) => {
   try {
-    console.log(req.body);
     const user = await User.findOne({
       where: {
         id: req.body.id
