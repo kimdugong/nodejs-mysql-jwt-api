@@ -75,6 +75,15 @@ sample data : [서울시 인터넷뱅킹 이용률 및 이용기기 통계](http
 
 # Database
 
+heroku의 ClearDB MySQL 사용
+
+```
+    "username": "b7b11c9d047aa8",
+    "password": "e0463f63",
+    "database": "heroku_4cfefa0ef2f540f",
+    "host": "us-cdbr-iron-east-02.cleardb.net",
+```
+
 ## Tables
 
 ![table description](https://d.pr/i/0v6EoB+)
