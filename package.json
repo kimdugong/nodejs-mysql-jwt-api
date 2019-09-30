@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node_modules/.bin/babel-node server.js",
-    "test": "test"
+    "test": "NODE_ENV=test mocha --require babel-core/register --timeout 10000"
   },
   "author": "kimdugong",
   "license": "ISC",
@@ -22,6 +22,9 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.1",
     "nodemon": "^1.19.2",
     "sequelize-cli": "^5.5.1"
   }
