@@ -49,6 +49,320 @@ nodejs express 웹 프레임워크
     Server running on port 3000
     table initializing finished!
 
+# API
+
+## 계정생성
+
+### Resource URL
+
+- `POST /api/v1/auth/signup`
+
+### Resource Information
+
+- format: JSON
+
+### Parameters
+
+id: 로그인에 필요한 id
+
+password: 로그인에 필요한 password
+
+### Example Requests
+
+```
+curl -X POST \
+  http://localhost:3000/api/v1/auth/signup \
+  -H 'Content-Type: application/json' \
+  -d '{"id": "userid", "password": "password"}'
+```
+
+### Example Response
+
+```
+{
+    "user": {
+        "id": "userid"
+    },
+    "message": "user create successfully."
+}
+```
+
+## 로그인 (토큰발급)
+
+### Resource URL
+
+- `POST /api/v1/auth/signin`
+
+### Resource Information
+
+- format: JSON
+
+### Parameters
+
+id: 로그인에 필요한 id
+
+password: 로그인에 필요한 password
+
+### Example Requests
+
+```
+curl -X POST \
+  http://localhost:3000/api/v1/auth/signin \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"id": "userid",
+	"password": "password"
+}'
+```
+
+### Example Response
+
+```
+{
+    "auth": true,
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJpZCIsImlhdCI6MTU2OTg2NTE1NiwiZXhwIjoxNTY5ODY1NDU2fQ.gKWPupJoL__huoJWwqOH0WSvyBN2MePTJkHVTtd2tt4",
+    "message": "sign in successfully"
+}
+```
+
+## 토큰 재발급
+
+### Resource URL
+
+- `GET /api/v1/auth/refresh`
+
+### Resource Information
+
+- format: JSON
+
+### Headers
+
+- Authorization : Bearer <Token>
+
+### Example Requests
+
+```
+curl -X GET \
+  http://localhost:3000/api/v1/auth/refresh \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJpZCIsImlhdCI6MTU2OTg2NDc0NywiZXhwIjoxNTY5ODY1MDQ3fQ.Pd8jLWeL7NtND-Kc_alAxBiGVKAcZncXEwK_kNXQy9Y'
+```
+
+### Example Response
+
+```
+{
+    "auth": true,
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJpZCIsImlhdCI6MTU2OTg2NTI5OCwiZXhwIjoxNTY5ODY1NTk4fQ.XNdufT3C3i_noO3WBOUEsAX64mj6tuoTN6xeJAV4eC8",
+    "message": "refresh token successfully"
+}
+```
+
+## 인터넷뱅킹 서비스 접속 기기 목록을 출력
+
+### Resource URL
+
+- `GET /api/v1/devices`
+
+### Resource Information
+
+- format: JSON
+
+### Headers
+
+- x-access-token : <Token>
+
+### Example Requests
+
+```
+curl -X GET \
+  http://localhost:3000/api/v1/devices \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJpZCIsImlhdCI6MTU2OTg2NDgyNSwiZXhwIjoxNTY5ODY1MTI1fQ.yc3x_uEU5vkwTdpF4xsb3dxUNFoli-EhIeqlhR57AFI'
+```
+
+### Example Response
+
+```
+{
+    "devices": [
+        {
+            "device_id": "34b3dd57-b7f3-431f-8732-f7165be32dad",
+            "device_name": "기타"
+        },
+        {
+            "device_id": "34decb5d-87a0-4d27-856d-d9848ea323cf",
+            "device_name": "데스크탑 컴퓨터"
+        },
+        {
+            "device_id": "382062a3-ab64-4cc3-9709-230217662b46",
+            "device_name": "노트북 컴퓨터"
+        },
+        {
+            "device_id": "a8875fb3-90cc-4607-9dd2-e9839ccfdda0",
+            "device_name": "스마트폰"
+        },
+        {
+            "device_id": "ca23662c-d4ea-4875-bcfe-a2532f648017",
+            "device_name": "스마트패드"
+        }
+    ]
+}
+```
+
+## 각 년도별로 인터넷뱅킹을 가장 많이 이용하는 접속기기를 출력
+
+### Resource URL
+
+- `GET /api/v1/devices/year`
+
+### Resource Information
+
+- format: JSON
+
+### Headers
+
+- x-access-token : <Token>
+
+### Example Requests
+
+```
+curl -X GET \
+  http://localhost:3000/api/v1/devices/year \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImR1Z29uZyIsImlhdCI6MTU2OTg0OTA3MiwiZXhwIjoxNTY5ODQ5MzcyfQ.k928VO9Gi0JOMyGnf9UpPKSXOSbMhYMN_tqVdBDoWVc'
+```
+
+### Example Response
+
+```
+{
+    "devices": [
+        {
+            "year": 2011,
+            "device_id": "34decb5d-87a0-4d27-856d-d9848ea323cf",
+            "rate": 95.1,
+            "device_name": "데스크탑 컴퓨터"
+        },
+        {
+            "year": 2012,
+            "device_id": "34decb5d-87a0-4d27-856d-d9848ea323cf",
+            "rate": 93.9,
+            "device_name": "데스크탑 컴퓨터"
+        },
+        {
+            "year": 2013,
+            "device_id": "34decb5d-87a0-4d27-856d-d9848ea323cf",
+            "rate": 67.1,
+            "device_name": "데스크탑 컴퓨터"
+        },
+        {
+            "year": 2014,
+            "device_id": "a8875fb3-90cc-4607-9dd2-e9839ccfdda0",
+            "rate": 64.2,
+            "device_name": "스마트폰"
+        },
+        {
+            "year": 2015,
+            "device_id": "a8875fb3-90cc-4607-9dd2-e9839ccfdda0",
+            "rate": 73.2,
+            "device_name": "스마트폰"
+        },
+        {
+            "year": 2016,
+            "device_id": "a8875fb3-90cc-4607-9dd2-e9839ccfdda0",
+            "rate": 85.1,
+            "device_name": "스마트폰"
+        },
+        {
+            "year": 2017,
+            "device_id": "a8875fb3-90cc-4607-9dd2-e9839ccfdda0",
+            "rate": 90.6,
+            "device_name": "스마트폰"
+        },
+        {
+            "year": 2018,
+            "device_id": "a8875fb3-90cc-4607-9dd2-e9839ccfdda0",
+            "rate": 90.5,
+            "device_name": "스마트폰"
+        }
+    ]
+}
+```
+
+## 특정 년도를 입력받아 그 해에 인터넷뱅킹에 가장 많이 접속하는 기기 이름을 출력
+
+### Resource URL
+
+- `GET /api/v1/devices/:year`
+
+### Resource Information
+
+- format: JSON
+
+### Headers
+
+- x-access-token : <Token>
+
+### Parameters
+
+- year: 연도
+
+### Example Requests
+
+```
+curl -X GET \
+  'http://localhost:3000/api/v1/devices/2013?=' \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJpZCIsImlhdCI6MTU2OTg2NTE1NiwiZXhwIjoxNTY5ODY1NDU2fQ.gKWPupJoL__huoJWwqOH0WSvyBN2MePTJkHVTtd2tt4'
+```
+
+### Example Response
+
+```
+{
+    "devices": {
+        "year": 2013,
+        "rate": 67.1,
+        "device_name": "데스크탑 컴퓨터"
+    }
+}
+```
+
+## 디바이스 아이디를 입력받아 인터넷뱅킹에 접속 비율이 가장 많은 해를 출력
+
+### Resource URL
+
+- `GET /api/v1/devices/year/:device_id`
+
+### Resource Information
+
+- format: JSON
+
+### Headers
+
+- x-access-token : <Token>
+
+### Parameters
+
+- device_id: 디바이스 아이디
+
+### Example Requests
+
+```
+curl -X GET \
+  http://localhost:3000/api/v1/devices/year/a8875fb3-90cc-4607-9dd2-e9839ccfdda0 \
+  -H 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJpZCIsImlhdCI6MTU2OTg2NTUyNCwiZXhwIjoxNTY5ODY1ODI0fQ.dRDD8YenuJ3U6Iyqy7nEpIKkBuWNkVAIa96Jv9oNyX0'
+```
+
+### Example Response
+
+```
+{
+    "devices": {
+        "year": 2017,
+        "rate": 90.6,
+        "device_name": "스마트폰"
+    }
+}
+```
+
 # Test code 실행
 
 1. mysql server 실행
