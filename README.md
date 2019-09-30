@@ -137,7 +137,7 @@ curl -X POST \
 
 ### Headers
 
-- Authorization : Bearer <Token>
+- Authorization : Bearer `<Token>`
 
 ### Example Requests
 
@@ -169,7 +169,7 @@ curl -X GET \
 
 ### Headers
 
-- x-access-token : <Token>
+- x-access-token : `<Token>`
 
 ### Example Requests
 
@@ -220,7 +220,7 @@ curl -X GET \
 
 ### Headers
 
-- x-access-token : <Token>
+- x-access-token : `<Token>`
 
 ### Example Requests
 
@@ -299,7 +299,7 @@ curl -X GET \
 
 ### Headers
 
-- x-access-token : <Token>
+- x-access-token : `<Token>`
 
 ### Parameters
 
@@ -337,7 +337,7 @@ curl -X GET \
 
 ### Headers
 
-- x-access-token : <Token>
+- x-access-token : `<Token>`
 
 ### Parameters
 
