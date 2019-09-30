@@ -2,6 +2,22 @@
 
 sample data : [서울시 인터넷뱅킹 이용률 및 이용기기 통계](http://data.seoul.go.kr/dataList/datasetView.do?infId=10909&srvType=S&serviceKind=2&c%20urrentPageNo=1)
 
+# 개발 프레임워크
+
+nodejs express 웹 프레임워크
+
+# 문제해결 전략
+
+- 샘플csv파일을 로드해서 DB에 저장하기 위한 데이타셋을 반환하는 함수를 작성한다.
+
+- 디바이스 아이디는 uuidv4를 포맷을 이용해서 중복되지 않게 만든다.
+
+- device_id와 device_name만 존재하는 데이터 셋이 따로 존재하므로 데이타는 device_id를 이용하여 저장한다.
+
+- yearusages의 device_id는 외래키로 devices의 기본키인 device_id를 참조한다.
+
+- jwt를 활용하기 위한 유저 생성 과정중 생성되는 password는 bcrypt를 이용하여 안전하게 저장한다.
+
 # 어플리케이션 실행
 
 1. nodejs 설치
@@ -120,5 +136,6 @@ heroku의 ClearDB MySQL 사용
 
     algorithm : HS256
     expireTime: 300s
+    test expireTime: 3s
 
 ![jwt](https://d.pr/i/iowkG3+)
