@@ -18,13 +18,17 @@ nodejs express 웹 프레임워크
 
 - jwt를 활용하기 위한 유저 생성 과정중 생성되는 password는 bcrypt를 이용하여 안전하게 저장한다.
 
+- jwt의 알고리즘은 HMACSHA256()을 사용한다. 만료시간 테스트를 위해 테스트시 토큰 만료시간은 3초 일반의 경우는 300초로 정의한다.
+
+- 원활한 프로그램 시작을 위해 db로 heroku 서버(clearDB MySQL)를 띄워놓았다.
+
 # 어플리케이션 실행
 
 1. nodejs 설치
 
 `brew install nodejs`
 
-2. mysql 설치 (test는 잦은 읽기 쓰기를 위해 localhost의 mysql을 사용합니다.)
+2. mysql 설치 (test의 잦은 읽기 쓰기를 위해 localhost의 mysql을 사용합니다. test를 제외한 재현은 heroku로 띄워놓은 db를 보기때문에 설치 안하시고 사용가능합니다.)
 
 `brew install mysql`
 
